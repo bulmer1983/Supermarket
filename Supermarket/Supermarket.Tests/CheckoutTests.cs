@@ -17,5 +17,22 @@ namespace Supermarket.Tests
             Assert.DoesNotThrow(() =>
             checkout.ScanItem("A99"));
         }
+
+
+        [Test]        
+        public void CurrentPrice_WithNoSpecialOffers_IsCorrect()
+        {
+            var checkout = SetupCheckout();
+
+            checkout.ScanItem("A99");
+
+            Assert.AreEqual(checkout.Price(), 0.50m);
+
+            checkout.ScanItem("A99");
+            Assert.AreEqual(checkout.Price(), 1.00m);
+
+            checkout.ScanItem("C40");
+            Assert.AreEqual(checkout.Price(), 1.60m);
+        }
     }
 }
