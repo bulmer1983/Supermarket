@@ -7,6 +7,8 @@ namespace Supermarket
 {
     public class Checkout : ICheckout
     {
+        private List<string> _scans = new List<string>();
+
         public decimal Price()
         {
             throw new NotImplementedException();
@@ -14,7 +16,7 @@ namespace Supermarket
 
         public void ScanItem(string Item)
         {
-            throw new NotImplementedException();
+            _scans.Add(Item);
         }
     }
 }
