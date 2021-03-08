@@ -27,13 +27,13 @@ namespace Supermarket
         }
 
 
-        public void ScanItem(string Item)
+        public void ScanItem(string Sku)
         {
-            if (!_items.Any(i => i.Sku == Item))
+            if (!_items.Any(i => i.Sku == Sku))
             {
                 throw new ArgumentException("Sku not reconsigned");
             }
-            _scans.Add(Item);
+            _scans.Add(Sku);
         }
     }
 }
