@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using Supermarket;
+using Supermarket.Models;
+using System.Collections.Generic;
 
 namespace Supermarket.Tests
 {
@@ -7,7 +9,12 @@ namespace Supermarket.Tests
     {
         public ICheckout SetupCheckout()
         {
-            return new Checkout();
+            var items = new List<Item>(){
+            new Item("A99", 0.50m ),
+            new Item("B15", 0.30m ),
+            new Item("C40", 0.60m ) };
+
+            return new Checkout(items);
         }
 
         [Test]
