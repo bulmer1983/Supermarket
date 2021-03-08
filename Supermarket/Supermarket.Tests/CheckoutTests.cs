@@ -56,7 +56,7 @@ namespace Supermarket.Tests
 
 
         [Test]
-        public void CurrentPrice_WuthSingleSpecialOffer_IsCorrect()
+        public void CurrentPrice_WithSingleSpecialOffer_IsCorrect()
         {
 
             var checkout = SetupCheckout();

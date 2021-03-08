@@ -8,7 +8,7 @@ namespace Supermarket
 {
     public class Checkout : ICheckout
     {
-        private List<string> _scans = new List<string>();
+        private List<ScannedSku> _scans = new List<ScannedSku>();
         private IEnumerable<Item> _items;
         private IEnumerable<SpecialOffer> _specialOffers;
 
@@ -20,7 +20,7 @@ namespace Supermarket
 
         public decimal TotalPrice()
         {
-            return _scans.Select(s => GetItemPrice(s)).Sum();
+            return _scans.Select(s => GetItemPrice(s.Sku) * s.NumberOfScans).Sum();
         }
 
         private decimal GetItemPrice(string sku)
@@ -35,7 +35,12 @@ namespace Supermarket
             {
                 throw new ArgumentException("Sku not reconsigned");
             }
-            _scans.Add(Sku);
+
+            if (_scans.Exists(s => s.Sku == Sku))
+                _scans.Find(s => s.Sku == Sku).NumberOfScans++;
+            else
+                _scans.Add(new ScannedSku(Sku, 1));
+
         }
     }
 }
