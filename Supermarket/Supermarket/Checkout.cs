@@ -29,6 +29,10 @@ namespace Supermarket
 
         public void ScanItem(string Item)
         {
+            if (!_items.Any(i => i.Sku == Item))
+            {
+                throw new ArgumentException("Sku not reconsigned");
+            }
             _scans.Add(Item);
         }
     }
