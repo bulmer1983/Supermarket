@@ -14,7 +14,11 @@ namespace Supermarket.Tests
             new Item("B15", 0.30m ),
             new Item("C40", 0.60m ) };
 
-            return new Checkout(items);
+            var offers = new List<SpecialOffer>() {
+            new SpecialOffer("A99", 3, 1.30m ),
+            new SpecialOffer("B15", 2, 0.45m )};
+
+            return new Checkout( items, offers);
         }
 
         [Test]

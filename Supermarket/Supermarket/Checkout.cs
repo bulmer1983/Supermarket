@@ -10,10 +10,12 @@ namespace Supermarket
     {
         private List<string> _scans = new List<string>();
         private IEnumerable<Item> _items;
+        private IEnumerable<SpecialOffer> _specialOffers;
 
-        public Checkout(IEnumerable<Item> items)
+        public Checkout(IEnumerable<Item> items, IEnumerable<SpecialOffer> specialOffers)
         {
             _items = items;
+            _specialOffers = specialOffers;
         }
 
         public decimal TotalPrice()
