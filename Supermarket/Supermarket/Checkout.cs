@@ -9,7 +9,7 @@ namespace Supermarket
     {
         private List<string> _scans = new List<string>();
 
-        public decimal Price()
+        public decimal TotalPrice()
         {
             throw new NotImplementedException();
         }
