@@ -49,5 +49,18 @@ namespace Supermarket.Tests
 
             Assert.Throws<System.ArgumentException>(() => checkout.ScanItem("Invalid"));
         }
+
+
+        [Test]
+        public void CurrentPrice_WuthSingleSpecialOffer_IsCorrect()
+        {
+
+            var checkout = SetupCheckout();
+
+            checkout.ScanItem("A99");
+            checkout.ScanItem("A99");
+            checkout.ScanItem("A99");
+            Assert.AreEqual(checkout.TotalPrice(), 1.30m);
+        }
     }
 }
