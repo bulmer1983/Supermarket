@@ -41,5 +41,13 @@ namespace Supermarket.Tests
             checkout.ScanItem("C40");
             Assert.AreEqual(checkout.TotalPrice(), 1.60m);
         }
+
+        [Test]
+        public void WhenItemScanned_WithunKnownSku_Throws()
+        {
+            var checkout = SetupCheckout();
+
+            Assert.Throws<System.ArgumentException>(() => checkout.ScanItem("Invalid"));
+        }
     }
 }
