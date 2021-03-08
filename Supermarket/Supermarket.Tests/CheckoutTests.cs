@@ -37,13 +37,13 @@ namespace Supermarket.Tests
 
             checkout.ScanItem("A99");
 
-            Assert.AreEqual(checkout.TotalPrice(), 0.50m);
+            Assert.AreEqual( 0.50m, checkout.TotalPrice());
 
             checkout.ScanItem("A99");
-            Assert.AreEqual(checkout.TotalPrice(), 1.00m);
+            Assert.AreEqual( 1.00m, checkout.TotalPrice());
 
             checkout.ScanItem("C40");
-            Assert.AreEqual(checkout.TotalPrice(), 1.60m);
+            Assert.AreEqual( 1.60m, checkout.TotalPrice());
         }
 
         [Test]
@@ -64,7 +64,7 @@ namespace Supermarket.Tests
             checkout.ScanItem("A99");
             checkout.ScanItem("A99");
             checkout.ScanItem("A99");
-            Assert.AreEqual(checkout.TotalPrice(), 1.30m);
+            Assert.AreEqual( 1.30m, checkout.TotalPrice());
         }
     }
 }

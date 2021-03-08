@@ -20,7 +20,25 @@ namespace Supermarket
 
         public decimal TotalPrice()
         {
-            return _scans.Select(s => GetItemPrice(s.Sku) * s.NumberOfScans).Sum();
+            var offerTotal = _scans.Select(s => GetOfferPrice(s)).Sum();
+
+            var noneOfferPrice = _scans.Select(s => GetItemPrice(s.Sku) * (s.NumberOfScans - QuantityEligibleForOffer(s))).Sum();
+
+            return offerTotal + noneOfferPrice;
+        }
+
+        private decimal GetOfferPrice(ScannedSku scannedSku)
+        {
+            var offer = _specialOffers.FirstOrDefault(o => o.Sku == scannedSku.Sku);
+            if (offer is null)
+            {
+                return 0m;
+            }
+
+            var numberOfTimesOfferUsed =  QuantityEligibleForOffer(scannedSku) / offer.Quantity;
+
+           return numberOfTimesOfferUsed * offer.OfferPrice;
+                    
         }
 
         private decimal GetItemPrice(string sku)
@@ -28,6 +46,17 @@ namespace Supermarket
             return _items.First(s => s.Sku == sku).Price;
         }
 
+
+        private int QuantityEligibleForOffer(ScannedSku scannedSku)
+        {
+            var offer = _specialOffers.FirstOrDefault(o => o.Sku == scannedSku.Sku);
+
+            if (offer is null)
+                return 0;
+            double s = scannedSku.NumberOfScans / offer.Quantity;
+            return (int)Math.Floor(s) * offer.Quantity;
+
+        }
 
         public void ScanItem(string Sku)
         {
