@@ -31,7 +31,7 @@ namespace Supermarket.Tests
 
 
         [Test]        
-        public void CurrentPrice_WithNoSpecialOffers_IsCorrect()
+        public void TotalPrice_WithNoSpecialOffers_IsCorrect()
         {
             var checkout = SetupCheckout();
 
@@ -56,7 +56,7 @@ namespace Supermarket.Tests
 
 
         [Test]
-        public void CurrentPrice_WithSingleSpecialOffer_IsCorrect()
+        public void TotalPrice_WithSingleSpecialOffer_IsCorrect()
         {
 
             var checkout = SetupCheckout();
@@ -66,5 +66,18 @@ namespace Supermarket.Tests
             checkout.ScanItem("A99");
             Assert.AreEqual( 1.30m, checkout.TotalPrice());
         }
+
+        [Test]
+        public void TotalPrice_SpecialOfferScannedOutOfSequence_IsCorrect()
+        {
+
+            var checkout = SetupCheckout();
+
+            checkout.ScanItem("B15");
+            checkout.ScanItem("A99");
+            checkout.ScanItem("B15");
+            Assert.AreEqual(.95m, checkout.TotalPrice());
+        }
+
     }
 }

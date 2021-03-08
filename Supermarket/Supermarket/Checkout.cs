@@ -22,9 +22,9 @@ namespace Supermarket
         {
             var offerTotal = _scans.Select(s => GetOfferPrice(s)).Sum();
 
-            var noneOfferPrice = _scans.Select(s => GetItemPrice(s.Sku) * (s.NumberOfScans - QuantityEligibleForOffer(s))).Sum();
+            var noneOfferTotal = _scans.Select(s => GetItemPrice(s.Sku) * (s.NumberOfScans - QuantityEligibleForOffer(s))).Sum();
 
-            return offerTotal + noneOfferPrice;
+            return offerTotal + noneOfferTotal;
         }
 
         private decimal GetOfferPrice(ScannedSku scannedSku)
@@ -37,7 +37,7 @@ namespace Supermarket
 
             var numberOfTimesOfferUsed =  QuantityEligibleForOffer(scannedSku) / offer.Quantity;
 
-           return numberOfTimesOfferUsed * offer.OfferPrice;
+            return numberOfTimesOfferUsed * offer.OfferPrice;
                     
         }
 
