@@ -26,7 +26,7 @@ namespace Supermarket.Tests
 
             checkout.ScanItem("A99");
 
-            Assert.AreEqual(checkout.Price(), 0.50m);
+            Assert.AreEqual(checkout.PriceT(), 0.50m);
 
             checkout.ScanItem("A99");
             Assert.AreEqual(checkout.Price(), 1.00m);

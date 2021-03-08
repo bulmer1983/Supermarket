@@ -7,7 +7,7 @@ namespace Supermarket
     public interface ICheckout
     {
         void ScanItem(string Item);
-        decimal Price();
+        decimal TotalPrice();
 
     }
 }
