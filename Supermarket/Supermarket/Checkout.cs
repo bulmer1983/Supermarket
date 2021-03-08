@@ -48,9 +48,12 @@ namespace Supermarket
 
         private int QuantityEligibleForOffer(ScannedSku scannedSku)
         {
+            if (!SkuHasOffer(scannedSku))
+                return 0m;
+
+
             var offer = _specialOffers.FirstOrDefault(o => o.Sku == scannedSku.Sku);
-            if (offer is null)
-                return 0;
+           
 
             return UsageOfOffer(scannedSku) * offer.Quantity;
 
